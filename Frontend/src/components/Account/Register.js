@@ -59,7 +59,7 @@ export default function Register() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         // prevent the form from refreshing the whole page
         e.preventDefault();
         setShowAlert(false);
@@ -85,11 +85,11 @@ export default function Register() {
         };
 
         // make the API call
-        axios(configuration)
+        await axios(configuration)
             .then((result) => {
                 setRegister(true);
                 setAlertType("success");
-                setAlertMessage(`Register successfully`);
+                setAlertMessage('Register successfully');
                 setShowAlert(true);
                 setTimeout(() => {
                     setShowAlert(false);

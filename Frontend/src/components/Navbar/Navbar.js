@@ -16,7 +16,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 export default function WithSubnavigation() {
 
     return (
-        <Box >
+        <Box>
             <Flex
                 bg={ useColorModeValue('white', 'gray.800') }
                 color={ useColorModeValue('gray.600', 'white') }
@@ -27,6 +27,8 @@ export default function WithSubnavigation() {
                 borderStyle={ 'solid' }
                 borderColor={ useColorModeValue('gray.200', 'gray.900') }
                 align={ 'center' }
+
+
             >
                 <Flex
                     flex={ { base: 1, md: 'auto' } }
@@ -37,7 +39,7 @@ export default function WithSubnavigation() {
                 <Flex flex={ { base: 1 } } justify={ { base: 'center', md: 'start' } }>
                     <Text
                         textAlign={ useBreakpointValue({ base: 'center', md: 'left' }) }
-                        fontFamily={ 'sans-serif'}
+                        fontFamily={ 'sans-serif' }
                         color={ useColorModeValue('gray.800', 'white') }
                         fontSize='2xl'
                     >

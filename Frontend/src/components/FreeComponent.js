@@ -36,9 +36,9 @@ export default function FreeComponent() {
                 justifyContent="center"
                 alignItems="center">
 
-                <Text fontSize='2xl' p='20px'>Free Component</Text>
+                <Text fontSize='3xl' p='20px'>Free Component</Text>
                 {/* displaying our message from our API call */ }
-                <Text fontSize='3xl' color='red.400' mb='20px'>{ message }</Text>
+                <Text fontSize='4xl' color='red.400' mb='20px'>{ message }</Text>
                 <PrintComponent />
             </Flex>
         </React.Fragment>

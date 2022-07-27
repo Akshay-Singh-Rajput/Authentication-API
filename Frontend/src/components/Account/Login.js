@@ -49,11 +49,21 @@ export default function Login() {
     const handleInputChange = (e) => { setFormData({ ...formData, [ e.target.id ]: e.target.value }); };
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         // prevent the form from refreshing the whole page
         e.preventDefault();
         const { email, password } = formData;
 
+        // get token generated on login
+        const token = await cookies.get("TOKEN");
+
+        if(token){
+            setAlertType("error");
+            setAlertMessage("Logout Firstly");
+            setShowAlert(true);
+            setTimeout(() => setShowAlert(false), 4000);
+            return;
+        }
         // alert on empty input
         if (!(email) || !(password)) {
             setAlertType("error");

@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { Button, Flex, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+
 const cookies = new Cookies();
 
 
 export default function AuthComponent() {
+    const navigate = useNavigate()
     // set an initial state for the message we will receive after the API call
     const [ message, setMessage ] = useState("");
     const [email, setEmail] = useState('')
@@ -45,7 +48,7 @@ export default function AuthComponent() {
         // destroy the cookie
         cookies.remove("TOKEN", { path: "/" });
         // redirect user to the landing page
-        window.location.href = "/";
+        navigate("/", { replace: true });
     };
 
     return (

@@ -16,13 +16,13 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Njoku Samson</td>
-                        <td>samson@yahoo.com</td>
+                        <td>Aakash Kumar</td>
+                        <td>tech.aku@gmail.com</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>Ebere Plenty</td>
-                        <td>ebere@gmail.com</td>
+                        <td>Akshay Kumar</td>
+                        <td>akshay@gmail.com</td>
                     </tr>
                     <tr>
                         <td>3</td>
