@@ -38,7 +38,7 @@ export default function WithSubnavigation() {
                         textAlign={ useBreakpointValue({ base: 'center', md: 'left' }) }
                         fontFamily={ 'heading' }
                         color={ useColorModeValue('gray.800', 'white') }
-                        >
+                    >
                         Logo
                     </Text>
 
@@ -102,6 +102,7 @@ const DesktopNav = () => {
                                 } }>
                                 { navItem.label }
                             </Link>
+                            {/* <NavLink to={ 'hello' }>Hello </NavLink> */}
                         </PopoverTrigger>
 
 
@@ -113,7 +114,6 @@ const DesktopNav = () => {
 };
 
 
-                            {/* <NavLink to={'hello'}  ></NavLink> */}
 
 
 
