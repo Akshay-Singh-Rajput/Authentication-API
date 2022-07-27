@@ -3,7 +3,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const router = express.Router();
+require('dotenv').config();
 
+// User Model
 const User = require('../model/user');
 
 
@@ -65,7 +67,9 @@ router.post("/register", async (request, response) => {
 
 });
 
-// login endpoint
+
+
+// *login endpoint
 router.post("/login", (request, response) => {
     // check if email exists
     User.findOne({ email: request.body.email })
@@ -93,8 +97,8 @@ router.post("/login", (request, response) => {
                             userId: user._id,
                             userEmail: user.email,
                         },
-                        "RANDOM-TOKEN",
-                        { expiresIn: "24h" }
+                        process.env.TOKEN_KEY,
+                        { expiresIn: "1m" }
                     );
 
                     //   return success response
@@ -115,7 +119,7 @@ router.post("/login", (request, response) => {
         // catch error if email does not exist
         .catch((e) => {
             response.status(404).send({
-                message: "Email not found",
+                message: "Not Registered",
                 e,
             });
         });

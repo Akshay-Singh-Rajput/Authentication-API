@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import PrintComponent from "./Printable/PrintComponent";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import PrintComponent from "../Printable/PrintComponent";
+import{ Flex, Text } from "@chakra-ui/react";
 
 export default function FreeComponent() {
-    // set an initial state for the message we will receive after the API call
+    //  initial state for the message we will receive after the API call
     const [ message, setMessage ] = useState("");
 
     // useEffect automatically executes once the page is fully loaded
     useEffect(() => {
-        // set configurations for the API call here
+        // setting configurations for the API call here
         const configuration = {
             method: "get",
-            url: "https://nodejs-mongodb-auth-app.herokuapp.com/free-endpoint",
+            url: "http://localhost:8080/free-endpoint",
         };
 
         // make the API call
@@ -36,7 +36,7 @@ export default function FreeComponent() {
                 justifyContent="center"
                 alignItems="center">
 
-                <Text fontSize='3xl' p='20px'>Free Component</Text>
+                <Text fontSize='3xl'>Free Component</Text>
                 {/* displaying our message from our API call */ }
                 <Text fontSize='4xl' color='red.400' mb='20px'>{ message }</Text>
                 <PrintComponent />

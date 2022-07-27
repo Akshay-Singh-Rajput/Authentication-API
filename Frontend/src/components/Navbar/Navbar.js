@@ -4,16 +4,13 @@ import {
     Text,
     Button,
     Stack,
-    Link,
-    Popover,
-    PopoverTrigger,
     useColorModeValue,
     useBreakpointValue,
 } from '@chakra-ui/react';
 
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-export default function WithSubnavigation() {
+export default function Navbar() {
 
     return (
         <Box>

@@ -18,7 +18,8 @@ import {
     Text,
     Link,
     Alert,
-    AlertIcon
+    AlertIcon,
+    textDecoration
 } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -32,7 +33,6 @@ export default function Login() {
     // initial state
     const [ formData, setFormData ] = useState({ email: "", password: "" });
     const [ showPassword, setShowPassword ] = useState(false);
-    const [ login, setLogin ] = useState(false);
 
     const cookies = new Cookies();
     const navigate = useNavigate();
@@ -57,7 +57,7 @@ export default function Login() {
         // get token generated on login
         const token = await cookies.get("TOKEN");
 
-        if(token){
+        if (token) {
             setAlertType("error");
             setAlertMessage("Logout Firstly");
             setShowAlert(true);
@@ -90,7 +90,6 @@ export default function Login() {
                     path: "/",
                 });
                 // redirect user to the auth page
-                setLogin(true);
                 setAlertType("success");
                 setAlertMessage(`Log In successfully`);
                 setShowAlert(true);
@@ -98,7 +97,7 @@ export default function Login() {
                     setShowAlert(false);
                     navigate("/", { replace: true });
                 }, 2000);
-                console.log(result);
+                // console.log(result);
 
             })
             .catch((error) => {
@@ -196,12 +195,14 @@ export default function Login() {
                         </form>
                     </Box>
                 </Stack>
-                <Box>
+                <Flex>
                     New to us?{ " " }
-                    <NavLink color="red.500" to="/signup">
+                    <NavLink to="/signup">
+                        <Text color="blue.500" ml='2'>
                         Sign Up
+                        </Text>
                     </NavLink>
-                </Box>
+                </Flex>
             </Flex>
         </React.Fragment>
     );

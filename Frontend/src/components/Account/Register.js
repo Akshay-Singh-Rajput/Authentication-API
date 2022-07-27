@@ -12,7 +12,6 @@ import {
     InputLeftElement,
     chakra,
     Box,
-    Link,
     Avatar,
     FormControl,
     InputRightElement,
@@ -49,7 +48,6 @@ export default function Register() {
 
     const handleInputChange = (e) => { setFormData({ ...formData, [ e.target.id ]: e.target.value }); };
 
-    const [ register, setRegister ] = useState(false);
 
     const clearForm = () => {
         setFormData({
@@ -87,7 +85,6 @@ export default function Register() {
         // make the API call
         await axios(configuration)
             .then((result) => {
-                setRegister(true);
                 setAlertType("success");
                 setAlertMessage('Register successfully');
                 setShowAlert(true);
@@ -196,13 +193,15 @@ export default function Register() {
                         </form>
                     </Box>
                 </Stack>
-                <Box>
+                <Flex>
                     Have a account?{ " " }
-                    <NavLink color="teal.500" to="/signin">
+                    <NavLink  to="/signin">
+                        <Text color="blue.500" ml='2'>
                         Login
+                        </Text>
                     </NavLink>
 
-                </Box>
+                </Flex>
             </Flex>
         </>
     );

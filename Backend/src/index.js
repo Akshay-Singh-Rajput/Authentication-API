@@ -30,7 +30,7 @@ app.get("/free-endpoint", (request, response) => {
     response.json({ message: "You are free to access me anytime" });
 });
 
-// authentication endpoint
+// authentication endpoint 
 app.get("/auth-endpoint", auth, (request, response) => {
     let email = request.user.userEmail;
     response.json({ email, message: "You are authorized to access me" });

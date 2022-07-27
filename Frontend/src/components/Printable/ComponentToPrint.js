@@ -1,37 +1,39 @@
+import { Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import React from "react";
+
 // component to be printed
 export const ComponentToPrint = React.forwardRef((props, ref) => {
 
     return (
-        <div ref={ ref }>
-            <h2 style={ { color: "green" } }>Attendance</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>S/N</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Aakash Kumar</td>
-                        <td>tech.aku@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Akshay Kumar</td>
-                        <td>akshay@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Undefined</td>
-                        <td>No Email</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <TableContainer ref={ ref }>
+            <Text fontSize='2xl' color='green'>Attendance</Text>
+            <Table variant='simple'>
+                <Thead>
+                    <Tr>
+                        <Th>S/N</Th>
+                        <Th>Name</Th>
+                        <Th >Email</Th>
+                    </Tr>
+                </Thead>
+                <Tbody>
+                    <Tr>
+                        <Td>1</Td>
+                        <Td>Akshay Kumar</Td>
+                        <Td >akshay@gmail.com</Td>
+                    </Tr>
+                    <Tr>
+                        <Td>2</Td>
+                        <Td>Aakash Kumar</Td>
+                        <Td>tech.aku@gmail.com</Td>
+                    </Tr>
+                    <Tr>
+                        <Td>3</Td>
+                        <Td>Undefined</Td>
+                        <Td >No Email</Td>
+                    </Tr>
+                </Tbody>
+            </Table>
+        </TableContainer>
     );
 
 });

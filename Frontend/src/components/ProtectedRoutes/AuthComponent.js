@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Button, Flex, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const cookies = new Cookies();
@@ -11,10 +11,17 @@ export default function AuthComponent() {
     const navigate = useNavigate()
     // set an initial state for the message we will receive after the API call
     const [ message, setMessage ] = useState("");
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState('');
+
+    // Alert
+    const [ showAlert, setShowAlert ] = useState(false);
+    const [ alertMessage, setAlertMessage ] = useState("");
+    const [ alertType, setAlertType ] = useState("");
+    
     const GetToken = async () => {
         // get token generated on login
         const token = await cookies.get("TOKEN");
+
         // set configurations for the API call here
         const configuration = {
             method: "get",
@@ -32,7 +39,17 @@ export default function AuthComponent() {
                 setEmail(result.data.email)
             })
             .catch((error) => {
-                error = new Error();
+               let newError =  error.response.data.error;
+                if (newError === 'Invalid request!'){
+                    setAlertType("error");
+                    setAlertMessage("Session Expired, Logging out...");
+                    setShowAlert(true);
+                    setTimeout(() => setShowAlert(false), 4000);
+                    setTimeout(() => logout(), 4200);
+
+                    return;
+                    
+                }
             });
 
 
@@ -60,13 +77,18 @@ export default function AuthComponent() {
             justifyContent="center"
             alignItems="center"
         >
-            <Text fontSize='2xl'>Auth Component</Text>
+            <Text fontSize='3xl'>Auth Component</Text>
 
             {/* displaying our message from our API call */ }
-            <Text fontSize='3xl' color='red.400'>{email} {message} </Text>
-
+            <Text fontSize='4xl' color='red.400' m='10px'>{email} {message} </Text>
+            { showAlert && (
+                <Alert status={ alertType } w='30%' mb='20px'>
+                    <AlertIcon />
+                    { alertMessage }
+                </Alert>
+            ) }
             {/* logout */ }
-            <Button type="submit" m='10' colorScheme="red" onClick={ () => logout() }>
+            <Button type="submit" colorScheme="red" m='10px' onClick={ () => logout() }>
                 Logout
             </Button>
         </Flex>
