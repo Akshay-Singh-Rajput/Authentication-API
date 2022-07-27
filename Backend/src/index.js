@@ -31,10 +31,12 @@ app.get("/free-endpoint", (request, response) => {
 
 // authentication endpoint
 app.get("/auth-endpoint", auth, (request, response) => {
-    response.json({ message: "You are authorized to access me" });
+    let email = request.user.userEmail;
+    response.json({ email, message: "You are authorized to access me" });
 });
 
 
+// User Controller login Signup
 app.use("/api", userController);
 
 

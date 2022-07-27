@@ -16,7 +16,9 @@ import {
     FormHelperText,
     InputRightElement,
     Text,
-    Link
+    Link,
+    Alert,
+    AlertIcon
 } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -35,6 +37,13 @@ export default function Login() {
     const cookies = new Cookies();
     const navigate = useNavigate();
 
+    // Alert
+    const [ showAlert, setShowAlert ] = useState(false);
+    const [ alertMessage, setAlertMessage ] = useState("");
+    const [ alertType, setAlertType ] = useState("");
+
+
+
     const handleShowClick = () => setShowPassword(!showPassword);
 
     const handleInputChange = (e) => { setFormData({ ...formData, [ e.target.id ]: e.target.value }); };
@@ -43,12 +52,16 @@ export default function Login() {
     const handleSubmit = (e) => {
         // prevent the form from refreshing the whole page
         e.preventDefault();
+        const { email, password } = formData;
 
-        if (!(formData.email || formData.password)) {
-            alert("please fill all the details");
+        // alert on empty input
+        if (!(email) || !(password)) {
+            setAlertType("error");
+            setAlertMessage("Please Fill All Fields");
+            setShowAlert(true);
+            setTimeout(() => setShowAlert(false), 4000);
             return;
         }
-        const { email, password } = formData;
         // set configurations
         const configuration = {
             method: "post",
@@ -67,15 +80,25 @@ export default function Login() {
                     path: "/",
                 });
                 // redirect user to the auth page
-                // window.location.href = "/auth";
-                navigate("/auth", { replace: true });
                 setLogin(true);
+                setAlertType("success");
+                setAlertMessage(`Log In successfully`);
+                setShowAlert(true);
+                setTimeout(() => {
+                    setShowAlert(false);
+                    navigate("/", { replace: true });
+                }, 2000);
                 console.log(result);
 
             })
             .catch((error) => {
-                error = new Error();
-                console.log(error);
+                // error 
+                let newError = error.response.data.message;
+                setAlertType("error");
+                setAlertMessage(newError);
+                setShowAlert(true);
+                setTimeout(() => setShowAlert(false), 4000);
+                console.log(newError);
 
             });
     };
@@ -97,6 +120,12 @@ export default function Login() {
                     justifyContent="center"
                     alignItems="center"
                 >
+                    { showAlert && (
+                        <Alert status={ alertType }>
+                            <AlertIcon />
+                            { alertMessage }
+                        </Alert>
+                    ) }
                     <Avatar bg="blue.500" />
                     <Heading color="blue.400">Welcome</Heading>
                     <Box minW={ { base: "90%", md: "468px" } }>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PrintComponent from "./Printable/PrintComponent";
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 export default function FreeComponent() {
     // set an initial state for the message we will receive after the API call
@@ -26,13 +27,20 @@ export default function FreeComponent() {
     }, []);
 
     return (
-        <div>
-            <h1 className="text-center">Free Component</h1>
+        <React.Fragment>
+            <Flex
+                flexDirection="column"
+                width="100wh"
+                height="100vh"
+                backgroundColor="blue.100"
+                justifyContent="center"
+                alignItems="center">
 
-            {/* displaying our message from our API call */ }
-            <h3 className="text-center text-danger">{ message }</h3>
-
-            <PrintComponent />
-        </div>
+                <Text fontSize='2xl' p='20px'>Free Component</Text>
+                {/* displaying our message from our API call */ }
+                <Text fontSize='3xl' color='red.400' mb='20px'>{ message }</Text>
+                <PrintComponent />
+            </Flex>
+        </React.Fragment>
     );
 }

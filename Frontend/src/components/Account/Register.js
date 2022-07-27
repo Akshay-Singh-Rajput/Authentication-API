@@ -16,14 +16,16 @@ import {
     Avatar,
     FormControl,
     InputRightElement,
-    Text
+    Text,
+    Alert,
+    AlertIcon
 } from "@chakra-ui/react";
 
 import { FaUserAlt, FaLock, FaUserTie } from "react-icons/fa";
 
 const CFaUserTie = chakra(FaUserTie);
 const CFaUserAlt = chakra(FaUserAlt);
-const CFaLock = chakra(FaLock); 
+const CFaLock = chakra(FaLock);
 
 export default function Register() {
     // initial state
@@ -38,16 +40,39 @@ export default function Register() {
         }
     );
 
+    // Alert
+    const [ showAlert, setShowAlert ] = useState(false);
+    const [ alertMessage, setAlertMessage ] = useState("");
+    const [ alertType, setAlertType ] = useState("");
+
     const handleShowClick = () => setShowPassword(!showPassword);
 
     const handleInputChange = (e) => { setFormData({ ...formData, [ e.target.id ]: e.target.value }); };
 
     const [ register, setRegister ] = useState(false);
 
+    const clearForm = () => {
+        setFormData({
+            name: "",
+            email: "",
+            password: "",
+        });
+    };
+
     const handleSubmit = (e) => {
         // prevent the form from refreshing the whole page
         e.preventDefault();
-const {name, email, password} = formData
+        setShowAlert(false);
+        const { name, email, password } = formData;
+
+        // alert on empty input
+        if (!(name) || !(email) || !(password)) {
+            setAlertType("error");
+            setAlertMessage("Please Fill All Fields");
+            setShowAlert(true);
+            setTimeout(() => setShowAlert(false), 4000);
+            return;
+        }
         // set configurations
         const configuration = {
             method: "post",
@@ -63,16 +88,30 @@ const {name, email, password} = formData
         axios(configuration)
             .then((result) => {
                 setRegister(true);
+                setAlertType("success");
+                setAlertMessage(`Register successfully`);
+                setShowAlert(true);
+                setTimeout(() => {
+                    setShowAlert(false);
+                    clearForm();
+                    navigate('/signin');
+                }, 4000);
                 console.log(result);
             })
             .catch((error) => {
-                error = new Error();
-                console.log(error)
+                // error 
+                let newError = error.response.data.message;
+                setAlertType("error");
+                setAlertMessage(newError);
+                setShowAlert(true);
+                setTimeout(() => setShowAlert(false), 4000);
+                console.log(newError);
             });
     };
 
     return (
         <>
+
             <Flex
                 flexDirection="column"
                 width="100wh"
@@ -87,6 +126,12 @@ const {name, email, password} = formData
                     justifyContent="center"
                     alignItems="center"
                 >
+                    { showAlert && (
+                        <Alert status={ alertType }>
+                            <AlertIcon />
+                            { alertMessage }
+                        </Alert>
+                    ) }
                     <Avatar bg="blue.500" />
                     <Heading color="blue.400">Welcome</Heading>
                     <Box minW={ { base: "90%", md: "468px" } }>
@@ -156,7 +201,7 @@ const {name, email, password} = formData
                     <NavLink color="teal.500" to="/signin">
                         Login
                     </NavLink>
-                  
+
                 </Box>
             </Flex>
         </>

@@ -11,7 +11,7 @@ const User = require('../model/user');
 router.post("/register", async (request, response) => {
     console.log('register hit');
 
-    const { email, password } = request.body;
+    const { name, email, password } = request.body;
     let registerdUser = await User.findOne({ email: email });
 
 
@@ -31,6 +31,7 @@ router.post("/register", async (request, response) => {
         .then((hashedPassword) => {
             // create a new user instance and collect the data
             const user = new User({
+                name,
                 email,
                 password: hashedPassword,
             });

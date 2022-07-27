@@ -16,7 +16,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 export default function WithSubnavigation() {
 
     return (
-        <Box>
+        <Box >
             <Flex
                 bg={ useColorModeValue('white', 'gray.800') }
                 color={ useColorModeValue('gray.600', 'white') }
@@ -26,7 +26,8 @@ export default function WithSubnavigation() {
                 borderBottom={ 1 }
                 borderStyle={ 'solid' }
                 borderColor={ useColorModeValue('gray.200', 'gray.900') }
-                align={ 'center' }>
+                align={ 'center' }
+            >
                 <Flex
                     flex={ { base: 1, md: 'auto' } }
                     ml={ { base: -2 } }
@@ -36,8 +37,9 @@ export default function WithSubnavigation() {
                 <Flex flex={ { base: 1 } } justify={ { base: 'center', md: 'start' } }>
                     <Text
                         textAlign={ useBreakpointValue({ base: 'center', md: 'left' }) }
-                        fontFamily={ 'heading' }
+                        fontFamily={ 'sans-serif'}
                         color={ useColorModeValue('gray.800', 'white') }
+                        fontSize='2xl'
                     >
                         Logo
                     </Text>
@@ -88,32 +90,23 @@ const DesktopNav = () => {
         <Stack direction={ 'row' } spacing={ 4 }>
             { NAV_ITEMS.map((navItem) => (
                 <Box key={ navItem.label }>
-                    <Popover trigger={ 'hover' } placement={ 'bottom-start' }>
-                        <PopoverTrigger>
-                            <Link
-                                p={ 2 }
-                                href={ navItem.href ?? '/' }
-                                fontSize={ 'sm' }
-                                fontWeight={ 500 }
-                                color={ linkColor }
-                                _hover={ {
-                                    textDecoration: 'none',
-                                    color: linkHoverColor,
-                                } }>
-                                { navItem.label }
-                            </Link>
-                            {/* <NavLink to={ 'hello' }>Hello </NavLink> */}
-                        </PopoverTrigger>
-
-
-                    </Popover>
+                    <NavLink
+                        to={ navItem.href }>
+                        <Text p={ 2 }
+                            fontSize={ 'sm' }
+                            fontWeight={ 500 }
+                            color={ linkColor }
+                            _hover={ {
+                                color: linkHoverColor,
+                            } }
+                        >{ navItem.label }</Text>
+                    </NavLink>
                 </Box>
             )) }
+
         </Stack>
     );
 };
-
-
 
 
 

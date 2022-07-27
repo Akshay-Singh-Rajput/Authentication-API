@@ -6,7 +6,7 @@ function PrivateRoute({ children }) {
     // get cookie from browser if logged in
     const token = cookies.get("TOKEN");
     // console.log({token});
-    return token ? children : <Navigate to="/" />;
+    return token ? children : <Navigate to="/signin" />;
 }
 
 export default PrivateRoute;
