@@ -66,7 +66,7 @@ export default function Register() {
         // alert on empty input
         if (!(name) || !(email) || !(password)) {
             setAlertType("error");
-            setAlertMessage("Please Fill All Fields");
+            setAlertMessage("Please Fill All The Fields");
             setShowAlert(true);
             setTimeout(() => setShowAlert(false), 4000);
             return;
@@ -86,7 +86,7 @@ export default function Register() {
         await axios(configuration)
             .then((result) => {
                 setAlertType("success");
-                setAlertMessage('Register successfully');
+                setAlertMessage('Register Successfully');
                 setShowAlert(true);
                 setTimeout(() => {
                     setShowAlert(false);

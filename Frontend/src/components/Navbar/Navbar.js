@@ -8,10 +8,10 @@ import {
     useBreakpointValue,
 } from '@chakra-ui/react';
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-
+const navigate = useNavigate()
     return (
         <Box>
             <Flex
@@ -58,7 +58,11 @@ export default function Navbar() {
                         fontSize={ 'sm' }
                         fontWeight={ 400 }
                         variant={ 'link' }
-                        href={ '/signin' }>
+                        onClick={() => navigate('/signin')}
+                        _hover={ {
+                            cursor: 'pointer'
+                        } }
+                        >
                         Sign In
                     </Button>
                     <Button
@@ -68,9 +72,10 @@ export default function Navbar() {
                         fontWeight={ 600 }
                         color={ 'white' }
                         bg={ 'blue.500' }
-                        href={ '/signup' }
+                        onClick={ () => navigate('/signup') }
                         _hover={ {
                             bg: 'blue.400',
+                            cursor: 'pointer'
                         } }>
                         Sign Up
                     </Button>

@@ -98,7 +98,7 @@ router.post("/login", (request, response) => {
                             userEmail: user.email,
                         },
                         process.env.TOKEN_KEY,
-                        { expiresIn: "1m" }
+                        { expiresIn: "12h" }
                     );
 
                     //   return success response

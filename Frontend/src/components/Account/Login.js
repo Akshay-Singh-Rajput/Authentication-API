@@ -19,7 +19,6 @@ import {
     Link,
     Alert,
     AlertIcon,
-    textDecoration
 } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -67,7 +66,7 @@ export default function Login() {
         // alert on empty input
         if (!(email) || !(password)) {
             setAlertType("error");
-            setAlertMessage("Please Fill All Fields");
+            setAlertMessage("Please Fill All The Fields");
             setShowAlert(true);
             setTimeout(() => setShowAlert(false), 4000);
             return;
@@ -198,8 +197,8 @@ export default function Login() {
                 <Flex>
                     New to us?{ " " }
                     <NavLink to="/signup">
-                        <Text color="blue.500" ml='2'>
-                        Sign Up
+                        <Text color="blue.500" ml='2' as='a' variant='link' >
+                            Sign Up
                         </Text>
                     </NavLink>
                 </Flex>
